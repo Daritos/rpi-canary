@@ -1,0 +1,15 @@
+[Unit]
+Description=OpenCanary
+After=syslog.target
+After=network.target
+
+[Service]
+User=root
+Restart=always
+Environment=VIRTUAL_ENV=/opt/canary-env/
+Environment=PATH=$VIRTUAL_ENV/bin:/usr/bin:$PATH
+WorkingDirectory=/opt/opencanary
+ExecStart=/opt/opencanary/bin/opencanaryd --dev
+
+[Install]
+WantedBy=multi-user.target
