@@ -13,8 +13,8 @@ cd opencanary
 python setup.py install
 
 # Fix broken links
-sudo link /usr/local/bin/twistd /home/pi/canary-env/bin/twistd
-sudo link /usr/local/bin/twistd /home/pi/opencanary/bin/twistd
+sudo link /usr/local/bin/twistd /opt/canary-env/bin/twistd
+sudo link /usr/local/bin/twistd /opt/opencanary/bin/twistd
 cp /opt/opencanary/build/scripts-3.7/opencanary.tac /opt/canary-env/bin/opencanary.tac
 sudo cp ./build/scripts-3.7/opencanary.tac /usr/local/bin/opencanary.tac
 
