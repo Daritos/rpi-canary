@@ -10,6 +10,7 @@ pip install –upgrade pip setuptools
 # Pull OpenCanary
 git clone https://github.com/thinkst/opencanary
 cd opencanary
+pip install -r requirements.txt
 python setup.py install
 
 # Fix broken links
