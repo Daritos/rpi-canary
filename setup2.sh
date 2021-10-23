@@ -18,5 +18,6 @@ python setup.py install
 #sudo link /usr/local/bin/twistd /opt/opencanary/bin/twistd
 #cp /opt/opencanary/build/scripts-3.7/opencanary.tac /opt/canary-env/bin/opencanary.tac
 #sudo cp ./build/scripts-3.7/opencanary.tac /usr/local/bin/opencanary.tac
+sudo link /opt/canary-env/bin/twistd /opt/opencanary/bin/twistd
 
 echo "Run setup3.sh from the rpi-canary directory"
