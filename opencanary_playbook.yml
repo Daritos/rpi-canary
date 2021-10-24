@@ -1,0 +1,5 @@
+- name: Install and configure OpenCanary
+  hosts: localhost
+  connection: local
+  become: true
+  roles: ['opencanary']

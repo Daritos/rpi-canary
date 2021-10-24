@@ -1,0 +1,1 @@
+ansible-playbook -i inventory/inventory.ini --ask-become-pass -k opencanary_playbook.yml -u pi

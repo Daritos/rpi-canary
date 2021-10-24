@@ -1,0 +1,103 @@
+- name: Update and upgrade apt packages
+  apt:
+    upgrade: yes
+    update_cache: yes
+    cache_valid_time: 86400 #One day
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+
+- name: Configure /etc/hosts
+  template:
+    src: hosts.j2
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Configure /etc/hostname
+  template:
+    src: hostname.j2
+    dest: /etc/hostname
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Set Macchanger to run automatically
+  debconf:
+    name: macchanger
+    question: macchanger/automatically_run
+    value: 'true'
+    vtype: boolean
+
+- name: Install Macchanger
+  apt:
+    name:
+    - macchanger
+
+- name: Stop and disable avahi-daemon
+  service:
+    name: avahi-daemon
+    state: stopped
+    enabled: false
+
+- name: Install opencanary dependencies
+  apt:
+    name:
+    - python-virtualenv
+    - python-pip
+    - python-dev
+    - libssl-dev
+    - libffi-dev
+    - git
+
+- name: Pull latest OpenCanary version
+  git:
+    repo: 'https://github.com/thinkst/opencanary'
+    dest: "/opt/opencanary"
+    update: true
+    force: true
+
+- name: Setup OpenCanary python environment
+  pip:
+    name: "file://opt/opencanary/requirements.txt"
+    virtualenv: "/opt/canary-env"
+    virtualenv_python: python3
+
+- name: Install OpenCanary
+  pip:
+    name: "file://opt/opencanary/setup.py"
+    virtualenv: "/opt/canary-env"
+    virtualenv_python: python3
+
+- name: Create a symbolic link for twistd
+  file:
+    src: /opt/canary-env/bin/twistd
+    dest: /opt/opencanary/bin/twistd
+    owner: root
+    group: root
+    state: link
+
+- name: Deploy OpenCanary configuration
+  template:
+    src: opencanary.conf.j2
+    dest: /opt/opencanary/opencanary.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Configure OpenCanary service
+  template:
+    src: opencanary.service.j2
+    dest: /etc/systemd/system/opencanary.service
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Stop and disable OpenCanary
+  service:
+    name: opencanary
+    state: started
+    enabled: true
+    daemon-reload: true
