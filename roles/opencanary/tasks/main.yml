@@ -92,7 +92,7 @@
 
 - name: Fix Samba
   replace:
-    path: /opt/opencanary/opencanary/samba.py
+    path: /opt/opencanary/opencanary/modules/samba.py
     regexp: 'path = data\[13\]'
     replace: 'path = data\[12\]'
 
