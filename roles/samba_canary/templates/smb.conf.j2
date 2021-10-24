@@ -23,8 +23,8 @@
    full_audit:failure = none
    full_audit:facility = local7
    full_audit:priority = notice
-[myshare]
-   comment = All the stuff!
+[{{ share_name }}]
+   comment = {{ share_comment }}
    path = /opt/samba
    guest ok = yes
    read only = yes

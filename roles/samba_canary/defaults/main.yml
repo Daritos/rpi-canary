@@ -1,0 +1,5 @@
+hostname: "SRV01"
+workgroup: "WORKGROUP"
+server_string: "NBDocs"
+share_name: "myshare"
+share_comment: "All the stuff!"

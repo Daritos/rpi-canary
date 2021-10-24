@@ -1,0 +1,12 @@
+- name: Install and configure OpenCanary
+  hosts: localhost
+  vars:
+    hostname: "SRV01"
+    smb_enabled: "true"
+    ssh_enabled: "false"
+    mssql_enabled: "true"
+    http_enabled: "false"
+    ftp_enabled: "false"
+  connection: local
+  become: true
+  roles: ['samba_canary','opencanary']

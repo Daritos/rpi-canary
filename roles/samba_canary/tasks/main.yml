@@ -1,0 +1,55 @@
+- name: Setup samba share folder
+  file:
+    path: "/opt/samba"
+    state: directory
+    owner: "{{ ansible_ssh_user }}"
+    group: "{{ ansible_ssh_user }}"
+
+- name: Install Samba
+  apt:
+    name:
+    - samba
+    - samba-common-bin
+
+- name: Deploy Samba configuration
+  template:
+    src: smb.conf.j2
+    dest: /etc/samba/smb.conf
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Reload Samba config
+  shell: "smbcontrol all reload-config"
+
+- name: Restart smbd
+  service:
+    name: smbd
+    state: restarted
+
+- name: Restart nmbd
+  service:
+    name: nmbd
+    state: restarted
+
+- name: Configure samba-audit in /etc/rsyslog.conf
+  lineinfile:
+    path: /etc/rsyslog.conf
+    line: 'local7.* /var/log/samba-audit.log'
+
+- name: Create samba-audit log file
+  file:
+    path: "/var/log/samba-audit.log"
+    state: touch
+    owner: "syslog"
+    group: "adm"
+
+- name: Restart rsyslog
+  service:
+    name: rsyslog
+    state: restarted
+
+- name: Restart syslog
+  service:
+    name: syslog
+    state: restarted
