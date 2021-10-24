@@ -66,13 +66,6 @@
     virtualenv_python: python3
     chdir: /opt/opencanary
 
-- name: Install OpenCanary
-  pip:
-    name: "file:///opt/opencanary/setup.py"
-    virtualenv: "/opt/canary-env"
-    virtualenv_python: python3
-    chdir: /opt/opencanary
-
 - name: Create a symbolic link for twistd
   file:
     src: /opt/canary-env/bin/twistd
