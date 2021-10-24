@@ -99,6 +99,6 @@
 - name: Start and enable OpenCanary
   service:
     name: opencanary
-    state: started
+    state: restarted
     enabled: true
     daemon-reload: true
