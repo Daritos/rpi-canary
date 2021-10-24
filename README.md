@@ -1,6 +1,15 @@
 # rpi-canary
 A small project to simplify the setup of OpenCanary on Raspberry Pi OS Lite
 
+## What it does
+
+* Disables avahi-daemon
+* Installs and enables macchanger
+* Configures the hostname
+* Configures OpenCanary into /opt/opencanary and /opt/canary-env
+* Sets OpenCanary to run at boot
+* (Optional) Installs samba and configures read-only share at /opt/samba
+
 ## Get started
 ```bash
 sudo apt install git ansible -y
