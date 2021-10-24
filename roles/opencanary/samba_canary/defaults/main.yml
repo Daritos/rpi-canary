@@ -1,0 +1,3 @@
+hostname: "SRV01"
+workgroup: "WORKGROUP"
+server_string: "NBDocs"

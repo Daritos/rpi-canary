@@ -1,0 +1,31 @@
+[global]
+   workgroup = {{ workgroup }}
+   server string = {{ server_string }}
+   netbios name = {{ hostname }}
+   dns proxy = no
+   log file = /var/log/samba/log.all
+   log level = 0
+   max log size = 100
+   panic action = /usr/share/samba/panic-action %d
+   #samba 4
+   server role = standalone server
+   #samba 3
+   #security = user
+   passdb backend = tdbsam
+   obey pam restrictions = yes
+   unix password sync = no
+   map to guest = bad user
+   usershare allow guests = yes
+   load printers = no
+   vfs object = full_audit
+   full_audit:prefix = %U|%I|%i|%m|%S|%L|%R|%a|%T|%D
+   full_audit:success = pread_recv pread_send
+   full_audit:failure = none
+   full_audit:facility = local7
+   full_audit:priority = notice
+[myshare]
+   comment = All the stuff!
+   path = /opt/samba
+   guest ok = yes
+   read only = yes
+   browseable = yes
