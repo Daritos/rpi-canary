@@ -61,7 +61,7 @@
 
 - name: Setup OpenCanary python environment
   pip:
-    name: "/opt/opencanary/requirements.txt"
+    requirements: "/opt/opencanary/requirements.txt"
     virtualenv: "/opt/canary-env"
     virtualenv_python: python3
 
