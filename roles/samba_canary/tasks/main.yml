@@ -41,7 +41,7 @@
   file:
     path: "/var/log/samba-audit.log"
     state: touch
-    owner: "syslog"
+    owner: "root"
     group: "adm"
 
 - name: Restart rsyslog
