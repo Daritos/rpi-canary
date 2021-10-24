@@ -28,3 +28,9 @@ Reboot once the playbook is complete and you are good to go
 ```bash
 sudo reboot now
 ```
+
+Logs are stored in
+
+```bash
+/var/tmp/opencanary.log
+```
