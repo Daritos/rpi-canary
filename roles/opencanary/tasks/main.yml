@@ -90,7 +90,7 @@
     group: root
     mode: 0644
 
-- name: Stop and disable OpenCanary
+- name: Start and enable OpenCanary
   service:
     name: opencanary
     state: started
