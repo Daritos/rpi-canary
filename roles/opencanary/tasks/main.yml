@@ -90,6 +90,12 @@
     group: root
     mode: 0644
 
+- name: Fix Samba
+  replace:
+    path: /opt/opencanary/opencanary/samba.py
+    regexp: 'path = data\[13\]'
+    replace: 'path = data\[12\]'
+
 - name: Start and enable OpenCanary
   service:
     name: opencanary
